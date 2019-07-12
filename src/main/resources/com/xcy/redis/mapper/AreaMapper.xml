@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcy.redis.mapper.AreaMapper">
+    <resultMap id="areaMap" type="area">
+        <result property="parentId" column="parent_id"/>
+    </resultMap>
+    <select id="selectAllArea" resultMap="areaMap">
+        select * from area where level = 1
+    </select>
+
+    <select id="selectIdByName" parameterType="string" resultMap="areaMap">
+        select * from area where name = #{name} and level = 1
+    </select>
+
+    <select id="selectRegionById" parameterType="int" resultMap="areaMap">
+        select * from area where level = 2 and parent_id = #{id}
+    </select>
+
+    <select id="selectRegionIdByName" parameterType="string" resultMap="areaMap">
+        select * from area where name = #{name} and level = 2
+    </select>
+
+    <select id="selectCityById" parameterType="int" resultMap="areaMap">
+        select * from area where level = 3 and parent_id = #{id}
+    </select>
+
+</mapper>
